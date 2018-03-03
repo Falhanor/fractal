@@ -19,7 +19,7 @@ public class IS_Koch extends JFrame{
 	public IS_Koch(){
 		kochPM = new kochPointsManagerImpl();
 		mainPan = getContentPane();
-		drawPanel = new Dessin();
+		drawPanel = new DrawingPanel();
 		mainPan.add(drawPanel);
 		initialize();
 	}
@@ -47,13 +47,13 @@ public class IS_Koch extends JFrame{
 		}
 	}
 	
-	public class Dessin extends JPanel {
+	public class DrawingPanel extends JPanel {
 	    /**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
 
-		public Dessin() {
+		public DrawingPanel() {
 	        setBackground(Color.white);
 	    }
 		

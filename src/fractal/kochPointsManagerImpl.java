@@ -18,7 +18,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		/*
 		 * rectangle complet
 		 * 
-		 *
+		 */
 		Point2D A = new Point2DImpl(100,170);
 		Point2D B = new Point2DImpl(680,170);
 		Point2D C = new Point2DImpl(680,390);
@@ -32,7 +32,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		lstPoints.add(C);
 		lstPoints.add(B);
 		lstPoints.add(A);
-		*/
+		
 		
 		/* rectangle int
 		 * 
