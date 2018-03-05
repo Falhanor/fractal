@@ -5,24 +5,52 @@ import java.util.LinkedList;
 
 
 public class kochPointsManagerImpl implements kochPointsManager {
-	List<Point2D> lstPoints;
+	protected List<Point2D> lstPoints;
+	protected Point2D neutral = null;
 
 	public kochPointsManagerImpl(){
 		lstPoints = new LinkedList<Point2D>();
 	}
 
 	@Override
-	public void initLine() {
-		
-		
+	public void initSample(int w,int h) {
+		/*
+		 * cross
+		 *
+		Point2D A = new Point2DImpl(0,h/2);
+		Point2D B = new Point2DImpl(w,h/2);
+		Point2D A2 = new Point2DImpl(w/2,0);
+		Point2D B2 = new Point2DImpl(w/2,h);
+		lstPoints.add(A);
+		lstPoints.add(B);
+		lstPoints.add(A);
+		lstPoints.add(neutral);
+		lstPoints.add(A2);
+		lstPoints.add(B2);
+		lstPoints.add(A2);	
+		*/
+		/*
+		 * diagonals
+		 *
+		Point2D A = new Point2DImpl(0,0);
+		Point2D B = new Point2DImpl(w,h);
+		Point2D A2 = new Point2DImpl(w,0);
+		Point2D B2 = new Point2DImpl(0,h);
+		lstPoints.add(A);
+		lstPoints.add(B);
+		lstPoints.add(A);
+		lstPoints.add(neutral);
+		lstPoints.add(A2);
+		lstPoints.add(B2);
+		lstPoints.add(A2);	
+		*/
 		/*
 		 * rectangle complet
-		 * 
-		 */
-		Point2D A = new Point2DImpl(100,170);
-		Point2D B = new Point2DImpl(680,170);
-		Point2D C = new Point2DImpl(680,390);
-		Point2D D = new Point2DImpl(100,390);
+		 *
+		Point2D A = new Point2DImpl(w/4,h/4);
+		Point2D B = new Point2DImpl(w/4 + 2*w/4,h/4);
+		Point2D C = new Point2DImpl(w/4 + 2*w/4,h/4 + 2*h/4);
+		Point2D D = new Point2DImpl(w/4 ,h/4 + 2*h/4);
 		lstPoints.add(A);
 		lstPoints.add(B);
 		lstPoints.add(C);
@@ -32,49 +60,47 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		lstPoints.add(C);
 		lstPoints.add(B);
 		lstPoints.add(A);
-		
+		*/
 		
 		/* rectangle int
-		 * 
-		Point2D A = new Point2DImpl(25,20);
-		Point2D B = new Point2DImpl(755,20);
-		Point2D C = new Point2DImpl(755,540);
-		Point2D D = new Point2DImpl(25,540);
+		 *
+		 *
+		Point2D A = new Point2DImpl(20,20);
+		Point2D B = new Point2DImpl(20+w-40,20);
+		Point2D C = new Point2DImpl(20+w-40,20+h-40);
+		Point2D D = new Point2DImpl(20 ,20+h-40);
 		lstPoints.add(A);
 		lstPoints.add(B);
 		lstPoints.add(C);
 		lstPoints.add(D);
 		lstPoints.add(A);
-		 */
-		/***
+		*/
+		/*
 		 * line
-		 *//*
-		Point2D A = new Point2DImpl(750,275);
-		Point2D B = new Point2DImpl(25,275);
+		 *
+		Point2D A = new Point2DImpl(20,h/2);
+		Point2D B = new Point2DImpl(20+w-40,h/2);
 		lstPoints.add(A);
 		lstPoints.add(B);
 		lstPoints.add(A);
 		*/
-	}
-
-	@Override
-	public void initTriangle() {
 		/*
 		 * flocon
 		 */
-		Point2D A = new Point2DImpl(400,20);
-		Point2D B = new Point2DImpl(175,410);
-		Point2D C = new Point2DImpl(625,410);
+		Point2D A = new Point2DImpl(w/2,10);
+		Point2D B = new Point2DImpl(w/5,3*h/4-10);
+		Point2D C = new Point2DImpl(4*w/5,3*h/4-10);
 		lstPoints.add(A);
 		lstPoints.add(B);
 		lstPoints.add(C);
 		lstPoints.add(A);
+		
 		/*
 		 * triangle interne
-		 * 
-		Point2D B = new Point2DImpl(400,10);
-		Point2D A = new Point2DImpl(100,535);
-		Point2D C = new Point2DImpl(700,535);
+		 *
+		Point2D B = new Point2DImpl(w/2,10);
+		Point2D A = new Point2DImpl(w/2-(h-20)/2,h-10);
+		Point2D C = new Point2DImpl(w/2+(h-20)/2,h-10);
 		lstPoints.add(A);
 		lstPoints.add(B);
 		lstPoints.add(C);
@@ -84,9 +110,9 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		/*
 		 * triangle complet
 		 * 
-		Point2D A = new Point2DImpl(400,20);
-		Point2D B = new Point2DImpl(175,410);
-		Point2D C = new Point2DImpl(625,410);
+		Point2D A = new Point2DImpl(w/2,10);
+		Point2D B = new Point2DImpl(w/5,3*h/4-10);
+		Point2D C = new Point2DImpl(4*w/5,3*h/4-10);
 		lstPoints.add(A);
 		lstPoints.add(B);
 		lstPoints.add(C);
@@ -94,10 +120,30 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		lstPoints.add(C);
 		lstPoints.add(B);
 		lstPoints.add(A); 
-		 * 
 		 */
+		 
 	}
 
+	@Override
+	public boolean addPoint(int x, int y) {
+		return lstPoints.add(new Point2DImpl(x,y));
+	}
+	@Override
+	public boolean addPoint(Point2D p) {
+		return lstPoints.add(p.clone());
+	}
+	
+	@Override
+	public boolean addBlank() {
+		return lstPoints.add(neutral);
+	}
+	
+	@Override
+	public void clear() {
+		lstPoints.clear();
+	}
+	
+	
 	@Override
 	public void computeNextStep() throws Exception {
 		if(lstPoints.isEmpty() || lstPoints.size()<2)
@@ -109,11 +155,12 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		Point2D previousPoint = A;
 		for(int i=1; i<lstPoints.size(); ++i){
 			Point2D thisPoint = lstPoints.get(i);
-			newLstPoints.addAll(computeSegment(previousPoint,thisPoint));
+			if(previousPoint != null && thisPoint != null){
+				newLstPoints.addAll(computeSegment(previousPoint,thisPoint));
+			}
 			newLstPoints.add(thisPoint);
 			previousPoint = thisPoint;
 		}
-		//newLstPoints.addAll(computeSegment(previousPoint,A));// à inverser peut-être....
 		lstPoints = newLstPoints;
 	}
 	
@@ -138,22 +185,12 @@ public class kochPointsManagerImpl implements kochPointsManager {
 	public String toString(){
 		StringBuffer str = new StringBuffer();
 		for(Point2D p : lstPoints)
-			str.append(p.toString() + ";");
+			if(p!=null)
+				str.append(p.toString() + ";");
+			else
+				str.append("neutral;");
 		
 		return str.toString();
-	}
-
-	public static void main(String args[]){
-		kochPointsManager kochTest = new kochPointsManagerImpl();
-		kochTest.initLine();
-		System.out.println(kochTest);
-		try {
-			kochTest.computeNextStep();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-		System.out.println(kochTest);
 	}
 
 	@Override
@@ -165,13 +202,14 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		Point2D A = lstPoints.get(0).clone();
 		Point2D previousPoint = A;
 		for(int i=1; i<lstPoints.size(); ++i){
-			Point2D thisPoint = lstPoints.get(i).clone();
-			Point2D[] segment = {previousPoint,thisPoint};
-			newLstSegment.add(segment);
+			Point2D thisPoint = lstPoints.get(i);
+			if(previousPoint != null && thisPoint != null){
+				thisPoint = lstPoints.get(i).clone();
+				Point2D[] segment = {previousPoint,thisPoint};
+				newLstSegment.add(segment);
+			}
 			previousPoint = thisPoint;
 		}
-		//Point2D[] segment = {previousPoint,A};
-		//newLstSegment.add(segment);
 		
 		return newLstSegment;
 	}

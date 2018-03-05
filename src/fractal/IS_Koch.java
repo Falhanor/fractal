@@ -32,13 +32,13 @@ public class IS_Koch extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
-		kochPM.initLine();
-		
+		kochPM.initSample(drawPanel.getWidth(), drawPanel.getHeight());
 		try {
-			for(int i=0;i<7;++i){
+			Thread.sleep(800);
+			for(int i=0;i<6;i++){				
+				kochPM.computeNextStep();
 				drawPanel.repaint();
 				Thread.sleep(800);
-				kochPM.computeNextStep();
 			}
 				
 		} catch (Exception e) {
