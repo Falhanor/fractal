@@ -1,5 +1,6 @@
 package fractal;
 
+import java.awt.Polygon;
 import java.util.List;
 
 public interface kochPointsManager {
@@ -14,4 +15,5 @@ public interface kochPointsManager {
 	void computeXSteps(int n) throws Exception;
 	
 	List<Point2D[]> getLstSegments() throws Exception;
+	List<Polygon> GetPolygons() throws Exception;
 }

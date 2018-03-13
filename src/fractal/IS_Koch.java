@@ -3,15 +3,20 @@ package fractal;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class IS_Koch extends JFrame{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static Color RANDOMCOLOR = new Color(new Random().nextInt(0xFFFFFF));
+	
 	protected JPanel drawPanel;
 	protected Container mainPan;
 	protected kochPointsManager kochPM;
@@ -31,6 +36,7 @@ public class IS_Koch extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+        this.getGraphics().setColor(RANDOMCOLOR);
 		
 		kochPM.initSample(drawPanel.getWidth(), drawPanel.getHeight());
 		try {
@@ -61,9 +67,10 @@ public class IS_Koch extends JFrame{
 	    public void paintComponent(Graphics g) {
 	        super.paintComponent(g);
 	        try {
-				kochPM.getLstSegments().forEach(p->{
-					g.drawLine((int)p[0].x(),(int)p[0].y(),(int)p[1].x(),(int)p[1].y());
-				});
+	        	kochPM.GetPolygons().forEach((shape)->{	
+	        		g.fillPolygon(shape);
+	        		g.setXORMode(RANDOMCOLOR.brighter());
+	        	});
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

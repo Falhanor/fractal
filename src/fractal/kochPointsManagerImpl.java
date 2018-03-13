@@ -1,6 +1,9 @@
 package fractal;
 
 import java.util.List;
+import java.util.Random;
+import java.awt.Polygon;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -14,114 +17,136 @@ public class kochPointsManagerImpl implements kochPointsManager {
 
 	@Override
 	public void initSample(int w,int h) {
-		/*
-		 * cross
-		 *
-		Point2D A = new Point2DImpl(0,h/2);
-		Point2D B = new Point2DImpl(w,h/2);
-		Point2D A2 = new Point2DImpl(w/2,0);
-		Point2D B2 = new Point2DImpl(w/2,h);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(A);
-		lstPoints.add(neutral);
-		lstPoints.add(A2);
-		lstPoints.add(B2);
-		lstPoints.add(A2);	
-		*/
-		/*
-		 * diagonals
-		 *
-		Point2D A = new Point2DImpl(0,0);
-		Point2D B = new Point2DImpl(w,h);
-		Point2D A2 = new Point2DImpl(w,0);
-		Point2D B2 = new Point2DImpl(0,h);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(A);
-		lstPoints.add(neutral);
-		lstPoints.add(A2);
-		lstPoints.add(B2);
-		lstPoints.add(A2);	
-		*/
-		/*
-		 * rectangle complet
-		 *
-		Point2D A = new Point2DImpl(w/4,h/4);
-		Point2D B = new Point2DImpl(w/4 + 2*w/4,h/4);
-		Point2D C = new Point2DImpl(w/4 + 2*w/4,h/4 + 2*h/4);
-		Point2D D = new Point2DImpl(w/4 ,h/4 + 2*h/4);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(C);
-		lstPoints.add(D);
-		lstPoints.add(A);
-		lstPoints.add(D);
-		lstPoints.add(C);
-		lstPoints.add(B);
-		lstPoints.add(A);
-		*/
+		int sampleId = new Random().nextInt() % 8;
 		
-		/* rectangle int
-		 *
-		 *
-		Point2D A = new Point2DImpl(20,20);
-		Point2D B = new Point2DImpl(20+w-40,20);
-		Point2D C = new Point2DImpl(20+w-40,20+h-40);
-		Point2D D = new Point2DImpl(20 ,20+h-40);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(C);
-		lstPoints.add(D);
-		lstPoints.add(A);
-		*/
-		/*
-		 * line
-		 *
-		Point2D A = new Point2DImpl(20,h/2);
-		Point2D B = new Point2DImpl(20+w-40,h/2);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(A);
-		*/
-		/*
-		 * flocon
-		 */
-		Point2D A = new Point2DImpl(w/2,10);
-		Point2D B = new Point2DImpl(w/5,3*h/4-10);
-		Point2D C = new Point2DImpl(4*w/5,3*h/4-10);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(C);
-		lstPoints.add(A);
-		
-		/*
-		 * triangle interne
-		 *
-		Point2D B = new Point2DImpl(w/2,10);
-		Point2D A = new Point2DImpl(w/2-(h-20)/2,h-10);
-		Point2D C = new Point2DImpl(w/2+(h-20)/2,h-10);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(C);
-		lstPoints.add(A);
-		*/
-		
-		/*
-		 * triangle complet
-		 * 
-		Point2D A = new Point2DImpl(w/2,10);
-		Point2D B = new Point2DImpl(w/5,3*h/4-10);
-		Point2D C = new Point2DImpl(4*w/5,3*h/4-10);
-		lstPoints.add(A);
-		lstPoints.add(B);
-		lstPoints.add(C);
-		lstPoints.add(A);
-		lstPoints.add(C);
-		lstPoints.add(B);
-		lstPoints.add(A); 
-		 */
-		 
+		Point2D A,B,C,D,A2,B2;
+		switch (sampleId){
+			case 1:	
+				/*
+				 * cross
+				 */
+				A = new Point2DImpl(0,h/2);
+				B = new Point2DImpl(w,h/2);
+				A2 = new Point2DImpl(w/2,0);
+				B2 = new Point2DImpl(w/2,h);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(A);
+				lstPoints.add(neutral);
+				lstPoints.add(A2);
+				lstPoints.add(B2);
+				lstPoints.add(A2);	
+				break;
+			case 2:
+				/*
+				 * diagonals
+				 */
+				A = new Point2DImpl(0,0);
+				B = new Point2DImpl(w,h);
+				A2 = new Point2DImpl(w,0);
+				B2 = new Point2DImpl(0,h);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(A);
+				lstPoints.add(neutral);
+				lstPoints.add(A2);
+				lstPoints.add(B2);
+				lstPoints.add(A2);	
+				break;
+			case 3:
+				/*
+				 * rectangle complet
+				 */
+				A = new Point2DImpl(w/4,h/4);
+				B = new Point2DImpl(w/4 + 2*w/4,h/4);
+				C = new Point2DImpl(w/4 + 2*w/4,h/4 + 2*h/4);
+				D = new Point2DImpl(w/4 ,h/4 + 2*h/4);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(C);
+				lstPoints.add(D);
+				lstPoints.add(A);
+				lstPoints.add(D);
+				lstPoints.add(C);
+				lstPoints.add(B);
+				lstPoints.add(A);
+				break;
+			case 4:
+				/* rectangle int
+				 *
+				 */
+				A = new Point2DImpl(20,20);
+				B = new Point2DImpl(20+w-40,20);
+				C = new Point2DImpl(20+w-40,20+h-40);
+				D = new Point2DImpl(20 ,20+h-40);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(C);
+				lstPoints.add(D);
+				lstPoints.add(A);
+				break;
+			case 5:
+				/*
+				 * line
+				 */
+				A = new Point2DImpl(20,h/2);
+				B = new Point2DImpl(20+w-40,h/2);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(A);
+				break;
+			case 6:
+				/*
+				 * flocon
+				 */
+				A = new Point2DImpl(w/2,10);
+				B = new Point2DImpl(w/5+8,3*h/4-10);
+				C = new Point2DImpl(4*w/5-8,3*h/4-10);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(C);
+				lstPoints.add(A);
+				break;
+			case 7:
+				/*
+				 * triangle interne
+				 */
+				B = new Point2DImpl(w/2,10);
+				A = new Point2DImpl(w/2-(h-20)/2,h-10);
+				C = new Point2DImpl(w/2+(h-20)/2,h-10);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(C);
+				lstPoints.add(A);
+				break;
+			case 8:
+				/*
+				 * triangle complet
+				 */
+				A = new Point2DImpl(w/2,10);
+				B = new Point2DImpl(w/5,3*h/4-10);
+				C = new Point2DImpl(4*w/5,3*h/4-10);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(C);
+				lstPoints.add(A);
+				lstPoints.add(C);
+				lstPoints.add(B);
+				lstPoints.add(A); 
+				break;
+			default:
+				/*
+				 * flocon
+				 */
+				A = new Point2DImpl(w/2,10);
+				B = new Point2DImpl(w/5+8,3*h/4-10);
+				C = new Point2DImpl(4*w/5-8,3*h/4-10);
+				lstPoints.add(A);
+				lstPoints.add(B);
+				lstPoints.add(C);
+				lstPoints.add(A);
+				break;
+		}
 	}
 
 	@Override
@@ -212,6 +237,26 @@ public class kochPointsManagerImpl implements kochPointsManager {
 		}
 		
 		return newLstSegment;
+	}
+
+	@Override
+	public List<Polygon> GetPolygons() throws Exception {
+		if(lstPoints.isEmpty() || lstPoints.size()<2)
+			throw new Exception("There is not enought points declared.");
+		List<Polygon> lstShape = new ArrayList<Polygon>();
+		
+		Polygon shape =  new Polygon();
+		for (Point2D p : lstPoints){
+			if (p!= neutral)
+				shape.addPoint(p.x(), p.y());
+			else{
+				lstShape.add(shape);
+				shape = new Polygon();
+			}		
+		}
+		lstShape.add(shape);
+		
+		return lstShape;
 	}
 
 }
