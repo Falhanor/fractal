@@ -14,14 +14,20 @@ public class kochPointsManagerImpl implements kochPointsManager {
 	public kochPointsManagerImpl(){
 		lstPoints = new LinkedList<Point2D>();
 	}
-
+	
 	@Override
-	public void initSample(int w,int h) {
-		int sampleId = new Random().nextInt() % 8;
-		
+	public int initSample(int w,int h) {
+		return initSample(w, h, -1);
+	}
+	@Override
+	public int initSample(int w,int h, int sampleId) {
+		this.clear();
+		if(sampleId == -1 || sampleId > 7)
+			sampleId = Math.abs(new Random().nextInt()) % 8;
+
 		Point2D A,B,C,D,A2,B2;
 		switch (sampleId){
-			case 1:	
+			case 0:	
 				/*
 				 * cross
 				 */
@@ -37,7 +43,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(B2);
 				lstPoints.add(A2);	
 				break;
-			case 2:
+			case 1:
 				/*
 				 * diagonals
 				 */
@@ -53,7 +59,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(B2);
 				lstPoints.add(A2);	
 				break;
-			case 3:
+			case 2:
 				/*
 				 * rectangle complet
 				 */
@@ -71,7 +77,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(B);
 				lstPoints.add(A);
 				break;
-			case 4:
+			case 3:
 				/* rectangle int
 				 *
 				 */
@@ -85,7 +91,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(D);
 				lstPoints.add(A);
 				break;
-			case 5:
+			case 4:
 				/*
 				 * line
 				 */
@@ -95,7 +101,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(B);
 				lstPoints.add(A);
 				break;
-			case 6:
+			case 5:
 				/*
 				 * flocon
 				 */
@@ -107,7 +113,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(C);
 				lstPoints.add(A);
 				break;
-			case 7:
+			case 6:
 				/*
 				 * triangle interne
 				 */
@@ -119,7 +125,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(C);
 				lstPoints.add(A);
 				break;
-			case 8:
+			case 7:
 				/*
 				 * triangle complet
 				 */
@@ -147,6 +153,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 				lstPoints.add(A);
 				break;
 		}
+		return sampleId;
 	}
 
 	@Override
@@ -202,7 +209,7 @@ public class kochPointsManagerImpl implements kochPointsManager {
 
 	@Override
 	public void computeXSteps(int n) throws Exception {
-		for(int step=0; step<n; ++step)
+		for(int step=0; step<n; step++)
 			computeNextStep();
 	}
 	
