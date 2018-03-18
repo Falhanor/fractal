@@ -56,7 +56,7 @@ public class IS_Koch extends JFrame {
 			}
 		});	
 		panButtons.add(btnRebuild);
-		JCheckBox chkFillSurfaces = new JCheckBox("Fill Surfaces");
+		JCheckBox chkFillSurfaces = new JCheckBox("Fill Surfaces", fillSurfacesMode);
 		chkFillSurfaces.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				fillSurfacesMode = chkFillSurfaces.isSelected();
@@ -64,7 +64,7 @@ public class IS_Koch extends JFrame {
 			}
 		});	
 		panButtons.add(chkFillSurfaces);
-		JCheckBox chkXorMode = new JCheckBox("Color Layers");
+		JCheckBox chkXorMode = new JCheckBox("Color Layers", xorMode);
 		chkXorMode.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				xorMode = chkXorMode.isSelected();
