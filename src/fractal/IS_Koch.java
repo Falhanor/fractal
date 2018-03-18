@@ -4,11 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -41,24 +43,50 @@ public class IS_Koch extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		Container mainPan = this.getContentPane();
-		//add kill button
-		JPanel btnPanel = new JPanel();
-		btnPanel.setLayout(new BorderLayout());
+		
+		//add button
+		JPanel panButtons = new JPanel();
+		panButtons.setLayout(new GridLayout(6,1));
+		mainPan.add(panButtons, BorderLayout.EAST);
+		
 		JButton btnRebuild = new JButton("Show construction");
 		btnRebuild.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				drawKochCurve(sampleId, stepsMode);
+				drawKochCurve(sampleId, true);
 			}
 		});	
-		btnPanel.add(btnRebuild, BorderLayout.LINE_START);
+		panButtons.add(btnRebuild);
+		JCheckBox chkFillSurfaces = new JCheckBox("Fill Surfaces");
+		chkFillSurfaces.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				fillSurfacesMode = chkFillSurfaces.isSelected();
+				drawPanel.repaint();
+			}
+		});	
+		panButtons.add(chkFillSurfaces);
+		JCheckBox chkXorMode = new JCheckBox("Color Layers");
+		chkXorMode.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				xorMode = chkXorMode.isSelected();
+				drawPanel.repaint();
+			}
+		});	
+		panButtons.add(chkXorMode);
+		JButton btnChangeColor = new JButton("Change Color");
+		btnChangeColor.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				RANDOMCOLOR = new Color(new Random().nextInt());
+				drawPanel.repaint();
+			}
+		});	
+		panButtons.add(btnChangeColor);
 		JButton btnOtherSample = new JButton("Other sample");
 		btnOtherSample.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				initKochCurve();
 			}
 		});	
-		btnPanel.add(btnOtherSample, BorderLayout.AFTER_LAST_LINE);
-		mainPan.add(btnPanel, BorderLayout.EAST);
+		panButtons.add(btnOtherSample);
 		
 		drawPanel = new DrawingPanel();
 		mainPan.add(drawPanel, BorderLayout.CENTER);
@@ -70,6 +98,7 @@ public class IS_Koch extends JFrame {
 	private void initKochCurve(){
 		drawKochCurve(-1, stepsMode);
 	}
+	
 	private void drawKochCurve(int sampleId, boolean stepsMode){
 		this.sampleId = kochPM.initSample(drawPanel.getWidth(), drawPanel.getHeight(), sampleId);
 		
@@ -107,17 +136,17 @@ public class IS_Koch extends JFrame {
 		private static final long serialVersionUID = 1L;
 
 		public DrawingPanel() {
-			if(fillSurfacesMode){
-					this.setForeground(RANDOMCOLOR);
-	        		this.setBackground(new Color(255-RANDOMCOLOR.getRed(),255-RANDOMCOLOR.getGreen(),255-RANDOMCOLOR.getBlue()));
-			}else{
-	        		this.setForeground(Color.WHITE);
-	        		this.setBackground(Color.BLACK);	
-			}
+			this.applyColor();
+		}
+		
+		public void applyColor(){
+			this.setForeground(RANDOMCOLOR);
+			this.setBackground(new Color(255-RANDOMCOLOR.getRed(),255-RANDOMCOLOR.getGreen(),255-RANDOMCOLOR.getBlue()));
 		}
 		
 	    @Override
 	    public void paintComponent(Graphics g) {
+	    	this.applyColor();
 	    	super.paintComponent(g);
 	        try {
 	        	kochPM.GetPolygons().forEach((shape)->{
