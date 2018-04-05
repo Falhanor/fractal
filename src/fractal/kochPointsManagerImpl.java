@@ -22,8 +22,10 @@ public class kochPointsManagerImpl implements kochPointsManager {
 	@Override
 	public int initSample(int w,int h, int sampleId) {
 		this.clear();
-		if(sampleId == -1 || sampleId > 7)
+		if(sampleId == -1)
 			sampleId = Math.abs(new Random().nextInt()) % 8;
+		else
+			sampleId = sampleId % 8;
 
 		Point2D A,B,C,D,A2,B2;
 		switch (sampleId){

@@ -27,7 +27,7 @@ public class IS_Koch extends JFrame {
 	
 	protected JPanel drawPanel;
 	protected kochPointsManager kochPM;
-	protected int sampleId;
+	protected static int sampleId;
 	
 	public IS_Koch(){
 		kochPM = new kochPointsManagerImpl();
@@ -83,7 +83,7 @@ public class IS_Koch extends JFrame {
 		JButton btnOtherSample = new JButton("Other sample");
 		btnOtherSample.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				initKochCurve();
+				drawKochCurve(sampleId+1, stepsMode);
 			}
 		});	
 		panButtons.add(btnOtherSample);
@@ -100,8 +100,8 @@ public class IS_Koch extends JFrame {
 	}
 	
 	private void drawKochCurve(int sampleId, boolean stepsMode){
-		this.sampleId = kochPM.initSample(drawPanel.getWidth(), drawPanel.getHeight(), sampleId);
-		
+		IS_Koch.sampleId = kochPM.initSample(drawPanel.getWidth(), drawPanel.getHeight(), sampleId);
+		this.setTitle("Koch - Sample n° " + (IS_Koch.sampleId+1) );
 		new Thread(){
 			public void run(){
 				drawPanel.repaint();
